@@ -1,0 +1,25 @@
+# Data manipulation
+pandas
+
+# Regular expressions and string handling
+# (no need to install re or string, they are built-in Python modules)
+
+# Natural Language Processing
+nltk
+scikit-learn
+
+# Feature extraction
+# (TfidfVectorizer is part of scikit-learn, no separate install needed)
+
+# Web application
+Flask
+
+# Model persistence
+# (pickle and os are built-in, no install needed)
+
+# Visualization
+matplotlib
+seaborn
+
+# HTTP requests
+requests
