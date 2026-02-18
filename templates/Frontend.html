@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Review Sentiment Analyzer</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            width: 700px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            resize: none;
+            outline: none;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .result-section {
+            margin-top: 30px;
+        }
+
+        .bars {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+        }
+
+        .bar-wrapper {
+            text-align: center;
+        }
+
+        .bar {
+            width: 90px;
+            height: 260px;
+            background: #2f2f2f;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .fill-negative {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, #ff416c, #ff4b2b);
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            transition: height 1s ease-in-out;
+        }
+
+        .fill-positive {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, #00b09b, #96c93d);
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            transition: height 1s ease-in-out;
+        }
+
+        .label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .prediction {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🎬 Movie Review Sentiment Analyzer</h1>
+
+    <form action="/predict" method="post">
+        <textarea name="review" placeholder="Enter your movie review here..." required></textarea>
+        <br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if prediction_text %}
+
+    <div class="result-section">
+
+        <div class="prediction">
+            Prediction: {{ prediction_text }}
+        </div>
+
+        <div class="bars">
+
+            <!-- Negative -->
+            <div class="bar-wrapper">
+                <div class="bar">
+                    <div class="fill-negative"
+                         style="height: {{ negative }}%;">
+                        {{ negative }}%
+                    </div>
+                </div>
+                <div class="label">Negative</div>
+            </div>
+
+            <!-- Positive -->
+            <div class="bar-wrapper">
+                <div class="bar">
+                    <div class="fill-positive"
+                         style="height: {{ positive }}%;">
+                        {{ positive }}%
+                    </div>
+                </div>
+                <div class="label">Positive</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
