@@ -3,6 +3,7 @@ import re
 import string
 import nltk
 from nltk.corpus import stopwords
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 
 negation_words = {"not", "no", "never"}
